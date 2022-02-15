@@ -20,7 +20,7 @@ public class FormController {
         return "form";
     }
 
-    //Procesar los datos enviados por el usuario
+/*    //Procesar los datos enviados por el usuario
     //@RequestParam para capturar los valores del formulario con name en sus etiquetas
     @PostMapping("/form")
     public String processForm(
@@ -29,6 +29,21 @@ public class FormController {
         //Al ser una clase con datos (que se deben persistir, o eliminar, o mostrar, etc), y no con un servicio
         //que "prestar", esta no se inyecta
         User newUser = new User(username, password, email);
+
+        model.addAttribute("title", "Filled form");
+        model.addAttribute("newUser", newUser);
+        return "filled";
+    }
+
+ */
+
+    /*Se puede usar el metodo anterior o este donde se pasa en la firma el objeto User, que tiene los mismos
+    atributos que los input.name del formulario, y si tiene setters, los usará para poblarse automaticamente
+
+    El User DEBE ser el primero en la firma del metodo
+     */
+    @PostMapping("/form")
+    public String processForm(User newUser, Model model) {
 
         model.addAttribute("title", "Filled form");
         model.addAttribute("newUser", newUser);
