@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" , xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}"></title>
+</head>
+<body>
+
+<h2 th:text="${title}"></h2>
+<!-- Target: Ruta URL a la que se enviará el formulario especificada con la etiqueta action
+     th para que funcione con Spring y @{} para rutas de la aplicacion
+
+     Al tener la misma url el post y el get, se debe indicar a cual irá en el fomrulario
+
+     input para indicar un campo del fomulario-->
+<form th:action="@{/app/form}" method="post">
+
+    <div>
+        <!-- el for debe ser el mismo del id y sirve para agregar funcionalidad que al hacer un clic se posicione
+        en el campo y el id solo está para asociar la funcionalidad-->
+        <label for="username">Username: </label>
+        <div>
+            <input type="text" name="username" id="username">
+        </div>
+    </div>
+
+    <div>
+        <label for="password">Password: </label>
+        <div>
+            <input type="password" name="password" id="password">
+        </div>
+    </div>
+
+    <div>
+        <label for="email">Email: </label>
+        <div>
+            <input type="email" name="email" id="email">
+        </div>
+    </div>
+
+    </br>
+    
+    <div>
+        <div>
+            <!--  -->
+            <input type="submit" value="Send form">
+        </div>
+    </div>
+
+</form>
+
+</body>
+</html>
