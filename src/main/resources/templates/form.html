@@ -14,17 +14,45 @@
 
      Al tener la misma url el post y el get, se debe indicar a cual irá en el fomrulario
      input para indicar un campo del fomulario-->
-<form th:action="@{/app/form}" method="post">
+
+<!-- th:object me ahorra el name y th:value, y los reemplaza por th:field y el asterisco relaciona el atributo al objeto especificado aquí -->
+<form th:action="@{/app/form}" method="post" th:object="${user}">
 
     <div>
         <!-- el for debe ser el mismo del id y sirve para agregar funcionalidad que al hacer un clic se posicione
         en el campo y el id solo está para asociar la funcionalidad-->
         <label for="username">Username: </label>
         <div>
-            <input type="text" name="username" id="username" th:value="${user.username}">
+            <input type="text" id="username"  th:field="*{username}" > <!--name="username" th:value="${user.username}" reemplazados por th:object y th:field-->
         </div>
-        <!-- Aquí se valida que exista la variable errors (el primer formulario no tiene esa variable) y que hayan errores para ese key-->
-        <div th:if="${error != null && error.containsKey('username')}" th:text="${error.get('username')}"></div>
+        <!-- Aquí se valida que exista la variable errors (el primer formulario no tiene esa variable) y que hayan errores para ese key
+        <div th:if="${error != null && error.containsKey('username')}" th:text="${error.get('username')}"></div> -->
+
+        <!-- Si se usa el manejo de errores a traves de Thymeleaf, se usa así: -->
+        <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+
+    </div>
+
+    </br>
+
+    <div>
+        <label for="name">Name: </label>
+        <div>
+            <input type="text" id="name" th:field="*{name}"> <!--name="name" -->
+        </div>
+        <!--<div th:if="${error != null && error.containsKey('name')}" th:text="${error.get('name')}"></div> -->
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+    </div>
+
+    </br>
+
+    <div>
+        <label for="lastname">Lastname: </label>
+        <div>
+            <input type="text" id="lastname" th:field="*{lastname}"> <!--name="lastname" -->
+        </div>
+        <!--<div th:if="${error != null && error.containsKey('lastname')}" th:text="${error.get('lastname')}"></div> -->
+        <div th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></div>
     </div>
 
     </br>
@@ -32,9 +60,10 @@
     <div>
         <label for="password">Password: </label>
         <div>
-            <input type="password" name="password" id="password">
+            <input type="password" id="password" th:field="*{password}"> <!--name="password" -->
         </div>
-        <div th:if="${error != null && error.containsKey('password')}" th:text="${error.get('password')}"></div>
+        <!--<div th:if="${error != null && error.containsKey('password')}" th:text="${error.get('password')}"></div> -->
+        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
     </div>
 
     </br>
@@ -43,9 +72,10 @@
         <label for="email">Email: </label>
         <div>
             <!-- Se deja de tipo text para poder realizar la validación del lado de Spring -->
-            <input type="text" name="email" id="email" th:value="${user.email}">
+            <input type="text" id="email" th:field="*{email}"> <!-- name="email"  th:value="${user.email}" -->
         </div>
-        <div th:if="${error != null && error.containsKey('email')}" th:text="${error.get('email')}"></div>
+        <!-- <div th:if="${error != null && error.containsKey('email')}" th:text="${error.get('email')}"></div>-->
+        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
     </div>
 
     </br>
