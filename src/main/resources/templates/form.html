@@ -7,11 +7,12 @@
 <body>
 
 <h2 th:text="${title}"></h2>
+
+<span th:text="${errors}"></span>
 <!-- Target: Ruta URL a la que se enviará el formulario especificada con la etiqueta action
      th para que funcione con Spring y @{} para rutas de la aplicacion
 
      Al tener la misma url el post y el get, se debe indicar a cual irá en el fomrulario
-
      input para indicar un campo del fomulario-->
 <form th:action="@{/app/form}" method="post">
 
@@ -20,23 +21,31 @@
         en el campo y el id solo está para asociar la funcionalidad-->
         <label for="username">Username: </label>
         <div>
-            <input type="text" name="username" id="username">
+            <input type="text" name="username" id="username" th:value="${user.username}">
         </div>
+        <!-- Aquí se valida que exista la variable errors (el primer formulario no tiene esa variable) y que hayan errores para ese key-->
+        <div th:if="${error != null && error.containsKey('username')}" th:text="${error.get('username')}"></div>
     </div>
+
+    </br>
 
     <div>
         <label for="password">Password: </label>
         <div>
             <input type="password" name="password" id="password">
         </div>
+        <div th:if="${error != null && error.containsKey('password')}" th:text="${error.get('password')}"></div>
     </div>
+
+    </br>
 
     <div>
         <label for="email">Email: </label>
         <div>
             <!-- Se deja de tipo text para poder realizar la validación del lado de Spring -->
-            <input type="text" name="email" id="email">
+            <input type="text" name="email" id="email" th:value="${user.email}">
         </div>
+        <div th:if="${error != null && error.containsKey('email')}" th:text="${error.get('email')}"></div>
     </div>
 
     </br>
