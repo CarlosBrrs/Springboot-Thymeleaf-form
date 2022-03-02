@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/app")
@@ -24,6 +22,9 @@ public class FormController {
 
         //Este usuario sirve para que no marque error al tratar de insertar los atributos en el formulario de un usuario que aun no ha diligenciado nada
         User newUser = new User();
+        newUser.setName("John");
+        newUser.setLastname("Doe");
+        newUser.setId("123.456.789-K");
         model.addAttribute("user", newUser);
         return "form";
     }
@@ -68,12 +69,16 @@ public class FormController {
         El BindingResult SIEMPRE debe estar JUSTO DESPUÉS del objeto que se valida
          */
         if (result.hasErrors()) {
+
+
+            /*Se puede omitir este codigo para manejar errores y usar el #fields y th:errors propio de Thymeleaf
+
             Map<String, String> errors = new HashMap<>();
             result.getFieldErrors().forEach(err -> errors.put(
                     err.getField(),
                     "El campo ".concat(err.getField()).concat(" presenta estos errores: ").concat(err.getDefaultMessage())));
             //Si result tiene errores, los guardaré en un map, result.getFieldErrors() me retorna una lista de FieldError err, los itero: en errors haces put de (campo que falló, mensaje) y retorno al formulario vacio
-            model.addAttribute("error", errors);
+            model.addAttribute("error", errors);*/
             model.addAttribute("title", "Please refill the form correctly");
 
             //Cuando se valida el formulario y se retorna al form nuevamente, lleva un objeto user (nombre de la clase en minusculas) automaticamente, con todos sus atributos, pudiendo llamarlo con thymeleaf
