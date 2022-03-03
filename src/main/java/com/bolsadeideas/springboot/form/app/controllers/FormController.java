@@ -7,11 +7,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/app")
+@SessionAttributes("user") //Al pasar del form al filled, el campo id se pierde, esta anotacion me permite persistir ese campo durante toda la sesion
 public class FormController {
 
     //Mostrar el fomrulario en pantalla
@@ -57,7 +60,7 @@ public class FormController {
     la propia clase usando anotaciones predefinidas o personalizadas
      */
     @PostMapping("/form")
-    public String processForm(/*@ModelAtributte("myUser")*/@Valid User newUser, BindingResult result, Model model) {
+    public String processForm(/*@ModelAtributte("myUser")*/@Valid User newUser, BindingResult result, Model model, SessionStatus session) {
                               /*sirve para darle ese nombre al objeto que va a la vista de forma automatica en caso que falle la validacion*/
 
         model.addAttribute("title", "Filled form");
@@ -85,6 +88,8 @@ public class FormController {
             return "form";
         }
         model.addAttribute("newUser", newUser);
+        //Cuando finaliza el proceso se debe limpiar con setComplete y de forma automatica se elimina el objeto usuario de la sesion
+        session.setComplete();
         return "filled";
     }
 
