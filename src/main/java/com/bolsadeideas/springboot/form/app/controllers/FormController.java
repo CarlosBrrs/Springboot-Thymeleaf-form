@@ -1,6 +1,8 @@
 package com.bolsadeideas.springboot.form.app.controllers;
 
 import com.bolsadeideas.springboot.form.app.models.domain.User;
+import com.bolsadeideas.springboot.form.app.validation.UserValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +18,10 @@ import javax.validation.Valid;
 @RequestMapping("/app")
 @SessionAttributes("user") //Al pasar del form al filled, el campo id se pierde, esta anotacion me permite persistir ese campo durante toda la sesion
 public class FormController {
+
+    //En este caso se usa la clase que implementa porque solo lo implementa el
+    @Autowired
+    private UserValidator validator;
 
     //Mostrar el fomrulario en pantalla
     @GetMapping("/form")
@@ -64,6 +70,7 @@ public class FormController {
                               /*sirve para darle ese nombre al objeto que va a la vista de forma automatica en caso que falle la validacion*/
 
         model.addAttribute("title", "Filled form");
+        validator.validate(newUser, result);
 
         /*
         Para interactuar con un objeto ya validado, se usa BindingResult en la firma del metodo y representa
@@ -72,7 +79,6 @@ public class FormController {
         El BindingResult SIEMPRE debe estar JUSTO DESPUÉS del objeto que se valida
          */
         if (result.hasErrors()) {
-
 
             /*Se puede omitir este codigo para manejar errores y usar el #fields y th:errors propio de Thymeleaf
 
