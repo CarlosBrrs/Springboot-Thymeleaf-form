@@ -1,6 +1,8 @@
 package com.bolsadeideas.springboot.form.app.models.domain;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 public class User {
 
@@ -8,19 +10,21 @@ public class User {
 
     //Los atributos deben ser iguales a los name en el form que va a recibir la información
     //Las validaciones que se activaron en el controller con @Valid se especifican acá
-    @NotEmpty //Distinto de null y no vacio
+    @NotEmpty(message = "El username no puede ser vacio") //Distinto de null y no vacio
+    @Size(min = 4, max = 12, message = "Longitud incorrecta (4-12)") //Solo para String, para numeros se usa @Min y @Max
     private String username;
 
-    @NotEmpty
+    @NotEmpty(message = "El nombre no puede ser vacio") //Envia msj personalizado al error
     private String name;
 
-    @NotEmpty
+    @NotEmpty(message = "El apellido no puede ser vacio")
     private String lastname;
 
-    @NotEmpty
+    @NotEmpty(message = "La contraseña no puede ser vacia")
     private String password;
 
-    @NotEmpty
+    @NotEmpty(message = "El email no puede ser vacio")
+    @Email(message = "Correo con formato incorrecto") //Valida que tenga @
     private String email;
 
     public User() {
