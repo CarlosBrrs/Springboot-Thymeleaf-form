@@ -7,7 +7,8 @@ import javax.validation.constraints.Size;
 
 public class User {
 
-    @Pattern(regexp = "[0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][A-Z]{1}")
+    //Se comentan las validaciones para validar desde la clase UserValidator
+    //@Pattern(regexp = "[0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][A-Z]{1}")
     private String id;
 
     //Los atributos deben ser iguales a los name en el form que va a recibir la información
@@ -16,7 +17,7 @@ public class User {
     @Size(min = 4, max = 12, message = "Longitud incorrecta (4-12)") //Solo para String, para numeros se usa @Min y @Max
     private String username;
 
-    @NotEmpty(message = "El nombre no puede ser vacio") //Envia msj personalizado al error
+    //@NotEmpty(message = "El nombre no puede ser vacio") //Envia msj personalizado al error
     private String name;
 
     @NotEmpty(message = "El apellido no puede ser vacio") //Los mensajes desde el messages.properties van a sobreescribir estos mensajes si aplica
