@@ -19,6 +19,17 @@
 <form th:action="@{/app/form}" method="post" th:object="${user}">
 
     <div>
+        <label for="id">ID: </label>
+        <div>
+            <input type="text" id="id" th:field="*{id}"> <!--name="lastname" -->
+        </div>
+        <!--<div th:if="${error != null && error.containsKey('id')}" th:text="${error.get('id')}"></div> -->
+        <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></div>
+    </div>
+
+    </br>
+
+    <div>
         <!-- el for debe ser el mismo del id y sirve para agregar funcionalidad que al hacer un clic se posicione
         en el campo y el id solo está para asociar la funcionalidad-->
         <label for="username">Username: </label>

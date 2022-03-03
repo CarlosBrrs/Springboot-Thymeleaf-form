@@ -2,10 +2,12 @@ package com.bolsadeideas.springboot.form.app.models.domain;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class User {
 
+    @Pattern(regexp = "[0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][A-Z]{1}")
     private String id;
 
     //Los atributos deben ser iguales a los name en el form que va a recibir la información
@@ -17,7 +19,7 @@ public class User {
     @NotEmpty(message = "El nombre no puede ser vacio") //Envia msj personalizado al error
     private String name;
 
-    @NotEmpty(message = "El apellido no puede ser vacio")
+    @NotEmpty(message = "El apellido no puede ser vacio") //Los mensajes desde el messages.properties van a sobreescribir estos mensajes si aplica
     private String lastname;
 
     @NotEmpty(message = "La contraseña no puede ser vacia")
