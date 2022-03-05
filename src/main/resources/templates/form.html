@@ -117,17 +117,25 @@
     </br>
 
     <div>
-        <label for="country">Country: </label>
+<!--        <label for="country">Country: </label>-->
+        <label for="country.id">Country: </label>
         <div>
             <!--select para lista desplegable-->
             <!--value para pasar lo que esté dentro al controller. Si pasa el primer option vacio, se valida en el back-->
-            <select id="country" th:field="*{country}">
+            <!--<select id="country" th:field="*{country}">
+            El select de country funciona para los List y Map, pero para el atributo país sucede que trata de poblar
+            con un value tipo String a un atributo tipo Pais, se mapea el field a Country.id-->
+            <select id="country.id" th:field="*{country.id}">
                 <option value="">--- Seleccionar país ---</option>
-                <option th:each="country: ${countries}" th:text="${country}" th:value="${country}"></option>
+                <!-- Para llamar los paises desde la list o desde el map
+                <option th:each="country: ${countriesList}" th:text="${country}" th:value="${country}"></option>-->
+                <!-- entrySet convierte el map en un set iterable donde se puede extraer el key o el value
+                <option th:each="country: ${countriesMap.entrySet()}" th:text="${country.value}" th:value="${country.key}"></option>-->
+                <option th:each="country: ${ListOfClassCountry}" th:text="${country.name}" th:value="${country.id} "></option>
             </select> <!-- name="country"  th:value="${user.country}" -->
         </div>
         <!-- <div th:if="${error != null && error.containsKey('country')}" th:text="${error.get('country')}"></div>-->
-        <div th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></div>
+        <div th:if="${#fields.hasErrors('country.id')}" th:errors="*{country.id}"></div>
     </div>
 
     </br>

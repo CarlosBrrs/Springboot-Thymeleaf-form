@@ -4,6 +4,7 @@ import com.bolsadeideas.springboot.form.app.validation.RegexId;
 import com.bolsadeideas.springboot.form.app.validation.RequiredNotEmptyBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
@@ -55,8 +56,12 @@ public class User {
     @DateTimeFormat(pattern = "yyyy-MM-dd") //Mantiene siempre el mismo formato. El formato que coincide con la validación del front es yyyy-MM-dd
     private Date birthDate;
 
+/*  Se comenta para implementar el country desde una clase
     @NotBlank
-    private String country;
+    private String country;*/
+
+    @Valid //Activa las validaciones dentro de Country
+    private Country country;
 
     public User() {
     }
@@ -125,11 +130,19 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    public String getCountry() {
+    /*public String getCountry() {
         return country;
     }
 
     public void setCountry(String country) {
+        this.country = country;
+    }*/
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
         this.country = country;
     }
 }

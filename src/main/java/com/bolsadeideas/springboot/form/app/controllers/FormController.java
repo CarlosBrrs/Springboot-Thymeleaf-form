@@ -1,6 +1,7 @@
 package com.bolsadeideas.springboot.form.app.controllers;
 
 import com.bolsadeideas.springboot.form.app.filters.UpperCaseFilter;
+import com.bolsadeideas.springboot.form.app.models.domain.Country;
 import com.bolsadeideas.springboot.form.app.models.domain.User;
 import com.bolsadeideas.springboot.form.app.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import javax.validation.Valid;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/app")
@@ -118,8 +121,8 @@ public class FormController {
 
     //Un método anotado así guardará lo que retorna y se pasa y se guarda en la vista como atributo y se pueden usar
     //Si no se define nombre del modelatributte, se pasa a la vista el nombre del método
-    @ModelAttribute("countries")
-    public List<String> getCountries() {
+    @ModelAttribute("countriesList")
+    public List<String> getCountriesList() {
         return Arrays.asList(
                 "Colombia",
                 "España",
@@ -133,5 +136,36 @@ public class FormController {
         );
     }
 
+    @ModelAttribute("countriesMap")
+    public Map<String, String> getCountriesMap() {
 
+        Map<String, String> countriesMap = new HashMap<>();
+        countriesMap.put("CO","Colombia");
+        countriesMap.put("ES","España");
+        countriesMap.put("MX","México");
+        countriesMap.put("CL","Chile");
+        countriesMap.put("CA","Canadá");
+        countriesMap.put("PE","Perú");
+        countriesMap.put("VE","Venezuela");
+        countriesMap.put("AR","Argentina");
+        countriesMap.put("UR","Uruguay");
+
+        return countriesMap;
+    }
+
+    @ModelAttribute("ListOfClassCountry")
+    public List<Country> getListOfClassCountry() {
+
+        return Arrays.asList(
+                new Country(1,"CO","Colombia"),
+                new Country(2,"ES","España"),
+                new Country(3,"MX","México"),
+                new Country(4,"CL","Chile"),
+                new Country(5,"CA","Canadá"),
+                new Country(6,"AR","Argentina"),
+                new Country(7,"PE","Perú"),
+                new Country(8,"VE","Venezuela"),
+                new Country(9,"UR","Uruguay")
+        );
+    }
 }
