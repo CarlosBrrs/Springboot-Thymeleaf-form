@@ -104,6 +104,19 @@
     </br>
 
     <div>
+        <label for="birthDate">Birth date: </label>
+        <div>
+            <!-- placeholder no permite formatos distintos al seteado
+                 type date me muestra el tabla para elegir la fecha segun la zona horaria o localizacion, no se puede personalizar y hay que tener cuidado que entre en conflicto con otras validaciones de fecha en el back-->
+            <input type="date" id="birthDate" th:field="*{birthDate}" placeholder="dd/MM/yyyy"> <!-- name="birthDate"  th:value="${user.birthDate}" -->
+        </div>
+        <!-- <div th:if="${error != null && error.containsKey('birthDate')}" th:text="${error.get('birthDate')}"></div>-->
+        <div th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></div>
+    </div>
+
+    </br>
+
+    <div>
         <div>
             <!--  -->
             <input type="submit" value="Send form">
