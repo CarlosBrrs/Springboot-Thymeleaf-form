@@ -21,15 +21,16 @@ public class UserValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
 
-        User user = (User) target;
+        //User user = (User) target;
 
         //Se puede usar ValidationUtils o bloque IF
-        ValidationUtils.rejectIfEmpty(errors, "name", "NotEmpty.user.name");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.user.name");
 
+        /* Se comenta porque la validación del id se realiza desde la anotación creada
         if(!user.getId().matches("[0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][A-Z]{1}")) {
             errors.rejectValue("id", "Pattern.user.id");
             //cada mensaje de error debe estar registrado en el messages.properties
-        }
+        }*/
 
     }
 }

@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -22,6 +24,12 @@ public class FormController {
     //En este caso se usa la clase que implementa porque solo lo implementa el
     @Autowired
     private UserValidator validator;
+
+    //Este metodo agregará las validaciones de UserValidator a la anotacion @Valid, de esta manera no se necesita la linea: validator.validate(newUser, result);
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.addValidators(validator);
+    }
 
     //Mostrar el fomrulario en pantalla
     @GetMapping("/form")
@@ -70,7 +78,9 @@ public class FormController {
                               /*sirve para darle ese nombre al objeto que va a la vista de forma automatica en caso que falle la validacion*/
 
         model.addAttribute("title", "Filled form");
-        validator.validate(newUser, result);
+
+        //Si se comenta este validator, se debe agregar al InitBinder para que valide desde el @Valid con lo que se configuró en la clase UserValidator
+        //validator.validate(newUser, result);
 
         /*
         Para interactuar con un objeto ya validado, se usa BindingResult en la firma del metodo y representa

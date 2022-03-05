@@ -92,6 +92,18 @@
     </br>
 
     <div>
+        <label for="count">Count: </label>
+        <div>
+            <!-- El tipo number no permite entradas de String en el formulario y coloca flechas de incr/decr en el campo -->
+            <input type="number" id="count" th:field="*{count}"> <!-- name="count"  th:value="${user.count}" -->
+        </div>
+        <!-- <div th:if="${error != null && error.containsKey('count')}" th:text="${error.get('count')}"></div>-->
+        <div th:if="${#fields.hasErrors('count')}" th:errors="*{count}"></div>
+    </div>
+
+    </br>
+
+    <div>
         <div>
             <!--  -->
             <input type="submit" value="Send form">
