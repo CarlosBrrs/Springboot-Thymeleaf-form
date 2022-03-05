@@ -16,8 +16,12 @@
     <li th:text="${newUser.password}"></li>
     <li th:text="${newUser.email}"></li>
     <li th:text="${newUser.count}"></li>
-    <li th:text="${newUser.birthDate}"></li>
-    <li th:text="${newUser.country}"></li>
+    <!-- Al pasar el birthDate de la vista al controller, se convierte de String a Date, pero al pasar del controller
+    a la vista, se pasa de Date a String y así lo mostrará tyhmeleaf. Se debe formatear de nuevo de Date a String
+     con un helper de thymeleaf llamandolo con #-->
+    <li th:text="${#dates.format(newUser.birthDate, 'dd/MMMM/yyyy')}"></li>
+    <!--<li th:text="${newUser.country}"></li>-->
+    <li th:text="${newUser.country.id}"></li>
 </ul>
 
 </body>
