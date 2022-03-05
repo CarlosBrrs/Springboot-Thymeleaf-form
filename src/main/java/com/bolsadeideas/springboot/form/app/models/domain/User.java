@@ -55,6 +55,9 @@ public class User {
     @DateTimeFormat(pattern = "yyyy-MM-dd") //Mantiene siempre el mismo formato. El formato que coincide con la validación del front es yyyy-MM-dd
     private Date birthDate;
 
+    @NotBlank
+    private String country;
+
     public User() {
     }
 
@@ -120,5 +123,13 @@ public class User {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }
