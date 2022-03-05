@@ -2,14 +2,18 @@ package com.bolsadeideas.springboot.form.app.models.domain;
 
 import com.bolsadeideas.springboot.form.app.validation.RegexId;
 import com.bolsadeideas.springboot.form.app.validation.RequiredNotEmptyBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 public class User {
 
@@ -43,6 +47,13 @@ public class User {
     @Min(5)
     @Max(5000)
     private Integer count;
+
+    //Validar fechas en pasado o futuro
+    //@Future
+    @Past
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd") //Mantiene siempre el mismo formato. El formato que coincide con la validación del front es yyyy-MM-dd
+    private Date birthDate;
 
     public User() {
     }
@@ -101,5 +112,13 @@ public class User {
 
     public void setCount(Integer count) {
         this.count = count;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 }
