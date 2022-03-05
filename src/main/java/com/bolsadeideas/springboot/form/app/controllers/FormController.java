@@ -1,5 +1,6 @@
 package com.bolsadeideas.springboot.form.app.controllers;
 
+import com.bolsadeideas.springboot.form.app.filters.UpperCaseFilter;
 import com.bolsadeideas.springboot.form.app.models.domain.User;
 import com.bolsadeideas.springboot.form.app.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +10,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import javax.validation.Valid;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequestMapping("/app")
@@ -29,6 +33,9 @@ public class FormController {
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.addValidators(validator);
+
+        //Si no se llena el segundo parámetro, el filtro se aplicará a todos los atributos de la clase del primer parámetro
+        binder.registerCustomEditor(String.class, "lastname", new UpperCaseFilter());
     }
 
     //Mostrar el fomrulario en pantalla
@@ -108,5 +115,23 @@ public class FormController {
         session.setComplete();
         return "filled";
     }
+
+    //Un método anotado así guardará lo que retorna y se pasa y se guarda en la vista como atributo y se pueden usar
+    //Si no se define nombre del modelatributte, se pasa a la vista el nombre del método
+    @ModelAttribute("countries")
+    public List<String> getCountries() {
+        return Arrays.asList(
+                "Colombia",
+                "España",
+                "México",
+                "Chile",
+                "Canadá",
+                "Argentina",
+                "Perú",
+                "Venezuela",
+                "Uruguay"
+        );
+    }
+
 
 }

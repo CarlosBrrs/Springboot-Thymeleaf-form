@@ -117,6 +117,22 @@
     </br>
 
     <div>
+        <label for="country">Country: </label>
+        <div>
+            <!--select para lista desplegable-->
+            <!--value para pasar lo que esté dentro al controller. Si pasa el primer option vacio, se valida en el back-->
+            <select id="country" th:field="*{country}">
+                <option value="">--- Seleccionar país ---</option>
+                <option th:each="country: ${countries}" th:text="${country}" th:value="${country}"></option>
+            </select> <!-- name="country"  th:value="${user.country}" -->
+        </div>
+        <!-- <div th:if="${error != null && error.containsKey('country')}" th:text="${error.get('country')}"></div>-->
+        <div th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></div>
+    </div>
+
+    </br>
+
+    <div>
         <div>
             <!--  -->
             <input type="submit" value="Send form">
