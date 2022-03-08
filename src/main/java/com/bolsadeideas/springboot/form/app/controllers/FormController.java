@@ -170,4 +170,26 @@ public class FormController {
 
         return countryService.getCountries();
     }
+
+    @ModelAttribute("rolesList")
+    public List<String> getRolesList() {
+        return Arrays.asList(
+                "ROLE_ADMIN",
+                "ROLE_USER",
+                "ROLE_GUEST",
+                "ROLE_MODERATOR"
+        );
+    }
+
+    @ModelAttribute("rolesMap")
+    public Map<String, String> getRolesMap() {
+
+        Map<String, String> rolesMap = new HashMap<>();
+        rolesMap.put("ROLE_ADMIN","Admin");
+        rolesMap.put("ROLE_USER","User");
+        rolesMap.put("ROLE_GUEST","Guest");
+        rolesMap.put("ROLE_MODERATOR","Moderator");
+
+        return rolesMap;
+    }
 }
