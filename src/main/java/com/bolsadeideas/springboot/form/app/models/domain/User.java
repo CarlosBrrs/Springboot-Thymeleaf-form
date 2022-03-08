@@ -65,8 +65,13 @@ public class User {
     @NotNull //Cuando se valida el objeto completo se hace con NotNull, y no solo con Valid para un atributo concreto
     private Country country;
 
+    /*Se comenta para implementar los roles desde una clase
     @NotEmpty
     private List<String> roles;
+ */
+
+    @NotEmpty
+    private List<Role> roles;
 
     public User() {
     }
@@ -150,12 +155,21 @@ public class User {
     public void setCountry(Country country) {
         this.country = country;
     }
-
+/*
     public List<String> getRoles() {
         return roles;
     }
 
     public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+ */
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 }

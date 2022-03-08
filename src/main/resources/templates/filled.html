@@ -29,8 +29,12 @@
 
 <div>Roles:</div>
 
-<ul>
+<!--<ul>
     <li th:each="role: ${newUser.roles}" th:text="${role}"></li>
+</ul>-->
+<!--Roles para el campo List<Role>-->
+<ul>
+    <li th:each="role: ${newUser.roles}" th:text="${role.code} + ': ' + ${role.name} + ' ==> ' + ${role.id}"></li>
 </ul>
 
 </body>

@@ -1,10 +1,13 @@
 package com.bolsadeideas.springboot.form.app.controllers;
 
 import com.bolsadeideas.springboot.form.app.filters.CountryPropertyEditor;
+import com.bolsadeideas.springboot.form.app.filters.RolePropertyEditor;
 import com.bolsadeideas.springboot.form.app.filters.UpperCaseFilter;
 import com.bolsadeideas.springboot.form.app.models.domain.Country;
+import com.bolsadeideas.springboot.form.app.models.domain.Role;
 import com.bolsadeideas.springboot.form.app.models.domain.User;
-import com.bolsadeideas.springboot.form.app.services.CountryService;
+import com.bolsadeideas.springboot.form.app.services.country.CountryService;
+import com.bolsadeideas.springboot.form.app.services.role.RoleService;
 import com.bolsadeideas.springboot.form.app.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,6 +44,12 @@ public class FormController {
     @Autowired
     private CountryPropertyEditor countryPropertyEditor;
 
+    @Autowired
+    private RoleService roleService;
+
+    @Autowired
+    private RolePropertyEditor rolePropertyEditor;
+
     //Este metodo agregará las validaciones de UserValidator a la anotacion @Valid, de esta manera no se necesita la linea: validator.validate(newUser, result);
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -51,6 +60,8 @@ public class FormController {
 
         //Va a llenar el Country con sus campos y no solo el id
         binder.registerCustomEditor(Country.class, "country", countryPropertyEditor);
+
+        binder.registerCustomEditor(Role.class, "roles", rolePropertyEditor);
     }
 
     //Mostrar el fomrulario en pantalla
@@ -168,7 +179,7 @@ public class FormController {
     @ModelAttribute("ListOfClassCountry")
     public List<Country> getListOfClassCountry() {
 
-        return countryService.getCountries();
+        return countryService.getListOfCountryClass();
     }
 
     @ModelAttribute("rolesList")
@@ -191,5 +202,11 @@ public class FormController {
         rolesMap.put("ROLE_MODERATOR","Moderator");
 
         return rolesMap;
+    }
+
+    @ModelAttribute("ListOfClassRole")
+    public List<Role> getListOfClassRole() {
+
+        return roleService.getListOfRoleClass();
     }
 }

@@ -1,6 +1,6 @@
 package com.bolsadeideas.springboot.form.app.filters;
 
-import com.bolsadeideas.springboot.form.app.services.CountryService;
+import com.bolsadeideas.springboot.form.app.services.country.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
