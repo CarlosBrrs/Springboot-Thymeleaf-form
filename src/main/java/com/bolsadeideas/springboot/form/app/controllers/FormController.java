@@ -212,4 +212,12 @@ public class FormController {
 
         return roleService.getListOfRoleClass();
     }
+
+    @ModelAttribute("genders")
+    public List<String> getGender() {
+        return Arrays.asList(
+                "Male",
+                "Female"
+        );
+    }
 }

@@ -189,11 +189,24 @@
 
     </br>
 
+<!--No se valida porque solo tiene dos opciones-->
     <div>
         <label for="allowMsg">Allow messages: </label>
         <div>
             <input type="checkbox" id="allowMsg" th:field="*{allowMsg}"> <!--name="allowMsg" -->
         </div>
+    </div>
+
+    </br>
+
+    <div>
+        <label>Gender: </label>
+        <div th:each="gender: ${genders}">
+            <input type="radio" th:field="*{gender}" th:value="${gender}"> <!--name="gender" -->
+            <label th:for="${#ids.prev('gender')}" th:text="${gender}"></label>
+        </div>
+        <!--<div th:if="${error != null && error.containsKey('gender')}" th:text="${error.get('gender')}"></div> -->
+        <div th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
     </div>
 
     </br>
