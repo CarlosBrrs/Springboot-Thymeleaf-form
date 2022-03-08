@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull;
 
 public class Country {
 
-    @NotNull //Para validar cuando se envie un country.id vacio desde el front, se complementa con @Valid en User
+    //@NotNull //Para validar cuando se envie un country.id vacio desde el front, se complementa con @Valid en User
     private Integer id;
     private String code;
     private String name;

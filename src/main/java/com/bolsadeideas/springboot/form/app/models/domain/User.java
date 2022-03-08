@@ -60,7 +60,8 @@ public class User {
     @NotBlank
     private String country;*/
 
-    @Valid //Activa las validaciones dentro de Country
+    //@Valid //Activa las validaciones dentro de Country
+    @NotNull //Cuando se valida el objeto completo se hace con NotNull, y no solo con Valid para un atributo concreto
     private Country country;
 
     public User() {
