@@ -22,6 +22,9 @@
     <li th:text="${#dates.format(newUser.birthDate, 'dd/MMMM/yyyy')}"></li>
     <!--<li th:text="${newUser.country}"></li>-->
     <li th:text="${newUser.country.id}"></li>
+    <li th:text="${newUser.country.code}"></li>
+    <li th:text="${newUser.country.name}"></li>
+
 </ul>
 
 </body>

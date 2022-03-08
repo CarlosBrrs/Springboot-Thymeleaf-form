@@ -15,9 +15,11 @@ public class CountryPropertyEditor extends PropertyEditorSupport {
 
     @Override
     public void setAsText(String idString) throws IllegalArgumentException {
-        if(idString != null && !idString.isEmpty()) {
+        if(idString != null && idString.length() > 0) {//Captura la excepcion para llenar el formulario con value="" en el country
             Integer idInteger = Integer.parseInt(idString);
             this.setValue(countryService.findCountryById(idInteger));
+        }else {
+            this.setValue(null);
         }
     }
 }

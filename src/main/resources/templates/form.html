@@ -118,14 +118,16 @@
 
     <div>
 <!--        <label for="country">Country: </label>-->
-        <label for="country.id">Country: </label>
+<!--        <label for="country.id">Country: </label> Este no se usa si se implementa el CountryPropertyEditor en el controlador, porque solo esta mapeando al atributo, y no al Objeto completo-->
+        <label for="country">Country: </label>
         <div>
             <!--select para lista desplegable
             value para pasar lo que esté dentro al controller. Si pasa el primer option vacio, se valida en el back-->
             <!--<select id="country" th:field="*{country}">
             El select de country funciona para los List y Map, pero para el atributo país sucede que trata de poblar
             con un value tipo String a un atributo tipo Pais, se mapea el field a Country.id-->
-            <select id="country.id" th:field="*{country.id}">
+            <!--<select id="country.id" th:field="*{country.id}"> Este no se usa si se implementa el CountryPropertyEditor en el controlador, porque solo esta mapeando al atributo, y no al Objeto completo-->
+            <select id="country" th:field="*{country}">
                 <option value="">--- Seleccionar país ---</option>
                 <!-- Para llamar los paises desde la list o desde el map
                 <option th:each="country: ${countriesList}" th:text="${country}" th:value="${country}"></option>-->
@@ -135,7 +137,8 @@
             </select> <!-- name="country"  th:value="${user.country}" -->
         </div>
         <!-- <div th:if="${error != null && error.containsKey('country')}" th:text="${error.get('country')}"></div>-->
-        <div th:if="${#fields.hasErrors('country.id')}" th:errors="*{country.id}"></div>
+        <!--<div th:if="${#fields.hasErrors('country.id')}" th:errors="*{country.id}"></div> Este no se usa si se implementa el CountryPropertyEditor en el controlador, porque solo esta mapeando al atributo, y no al Objeto completo-->
+        <div th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></div>
     </div>
 
     </br>
