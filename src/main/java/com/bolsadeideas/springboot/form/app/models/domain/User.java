@@ -75,6 +75,9 @@ public class User {
     //No se valida porque solo tiene true o false
     private Boolean allowMsg;
 
+    @NotEmpty
+    private String gender;
+
     public User() {
     }
 
@@ -181,5 +184,13 @@ public class User {
 
     public void setAllowMsg(Boolean allowMsg) {
         this.allowMsg = allowMsg;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }
