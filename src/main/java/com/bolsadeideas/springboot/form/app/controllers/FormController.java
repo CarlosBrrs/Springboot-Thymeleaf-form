@@ -75,6 +75,9 @@ public class FormController {
         newUser.setName("John");
         newUser.setLastname("Doe");
         newUser.setId("123.456.789-K");
+
+        //debe estar por defecto habilitado o deshabilitado
+        newUser.setAllowMsg(true);
         model.addAttribute("user", newUser);
         return "form";
     }

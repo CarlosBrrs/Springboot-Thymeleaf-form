@@ -4,9 +4,7 @@ import com.bolsadeideas.springboot.form.app.validation.RegexId;
 import com.bolsadeideas.springboot.form.app.validation.RequiredNotEmptyBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -54,7 +52,8 @@ public class User {
     //@Future
     @Past
     @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd") //Mantiene siempre el mismo formato. El formato que coincide con la validación del front es yyyy-MM-dd
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    //Mantiene siempre el mismo formato. El formato que coincide con la validación del front es yyyy-MM-dd
     private Date birthDate;
 
 /*  Se comenta para implementar el country desde una clase
@@ -72,6 +71,9 @@ public class User {
 
     @NotEmpty
     private List<Role> roles;
+
+    //No se valida porque solo tiene true o false
+    private Boolean allowMsg;
 
     public User() {
     }
@@ -171,5 +173,13 @@ public class User {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public Boolean getAllowMsg() {
+        return allowMsg;
+    }
+
+    public void setAllowMsg(Boolean allowMsg) {
+        this.allowMsg = allowMsg;
     }
 }
