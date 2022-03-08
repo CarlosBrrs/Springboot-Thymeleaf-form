@@ -1,6 +1,7 @@
-package com.bolsadeideas.springboot.form.app.services;
+package com.bolsadeideas.springboot.form.app.services.country;
 
 import com.bolsadeideas.springboot.form.app.models.domain.Country;
+import com.bolsadeideas.springboot.form.app.services.country.CountryServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +27,7 @@ public class CountryServiceImplTest {
     public void shouldValidateAFilledListOfCountries() {
         //Give none
         //When
-        List<Country> countries = countryService.getCountries();
+        List<Country> countries = countryService.getListOfCountryClass();
         //Then
         assertNotNull(countries);
     }

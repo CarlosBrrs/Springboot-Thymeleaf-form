@@ -157,14 +157,31 @@
 
     </br>-->
 
-    <div>
+    <!--<div>
         <label>Roles: </label>
         <div th:each="role: ${rolesMap.entrySet()}">
+            &lt;!&ndash; Por debajo toma el role del th:value y lo agrega a la lista roles del th:field
+             value del input envia el key y text de label toma el valor &ndash;&gt;
+            <input type="checkbox" th:field="*{roles}" th:value="${role.key}"> &lt;!&ndash;name="roles" &ndash;&gt;
+            &lt;!&ndash;th:for para marcar el checkbox cliceando sobre el nombre del rol&ndash;&gt;
+            <label th:for="${#ids.prev('roles')}" th:text="${role.value}"></label>
+        </div>
+        &lt;!&ndash;<div th:if="${error != null && error.containsKey('roles')}" th:text="${error.get('roles')}"></div> &ndash;&gt;
+        <div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>
+    </div>
+
+        </br>
+-->
+
+    <!--div para List<Role> -->
+    <div>
+        <label>Roles: </label>
+        <div th:each="role: ${ListOfClassRole}">
             <!-- Por debajo toma el role del th:value y lo agrega a la lista roles del th:field
              value del input envia el key y text de label toma el valor -->
-            <input type="checkbox" th:field="*{roles}" th:value="${role.key}"> <!--name="roles" -->
+            <input type="checkbox" th:field="*{roles}" th:value="${role.id}"> <!--name="roles" -->
             <!--th:for para marcar el checkbox cliceando sobre el nombre del rol-->
-            <label th:for="${#ids.prev('roles')}" th:text="${role.value}"></label>
+            <label th:for="${#ids.prev('roles')}" th:text="${role.name}"></label>
         </div>
         <!--<div th:if="${error != null && error.containsKey('roles')}" th:text="${error.get('roles')}"></div> -->
         <div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>
