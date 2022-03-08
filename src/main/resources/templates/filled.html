@@ -27,5 +27,11 @@
 
 </ul>
 
+<div>Roles:</div>
+
+<ul>
+    <li th:each="role: ${newUser.roles}" th:text="${role}"></li>
+</ul>
+
 </body>
 </html>

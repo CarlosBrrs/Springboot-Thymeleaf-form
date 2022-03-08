@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 public class User {
 
@@ -63,6 +64,9 @@ public class User {
     //@Valid //Activa las validaciones dentro de Country
     @NotNull //Cuando se valida el objeto completo se hace con NotNull, y no solo con Valid para un atributo concreto
     private Country country;
+
+    @NotEmpty
+    private List<String> roles;
 
     public User() {
     }
@@ -145,5 +149,13 @@ public class User {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 }
