@@ -1,8 +1,10 @@
 package com.bolsadeideas.springboot.form.app.controllers;
 
+import com.bolsadeideas.springboot.form.app.filters.CountryPropertyEditor;
 import com.bolsadeideas.springboot.form.app.filters.UpperCaseFilter;
 import com.bolsadeideas.springboot.form.app.models.domain.Country;
 import com.bolsadeideas.springboot.form.app.models.domain.User;
+import com.bolsadeideas.springboot.form.app.services.CountryService;
 import com.bolsadeideas.springboot.form.app.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +34,13 @@ public class FormController {
     @Autowired
     private UserValidator validator;
 
+    @Autowired
+    private CountryService countryService;
+
+    //Se inyecta para poder llenar el Country completo con sus atributos
+    @Autowired
+    private CountryPropertyEditor countryPropertyEditor;
+
     //Este metodo agregará las validaciones de UserValidator a la anotacion @Valid, de esta manera no se necesita la linea: validator.validate(newUser, result);
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -39,6 +48,9 @@ public class FormController {
 
         //Si no se llena el segundo parámetro, el filtro se aplicará a todos los atributos de la clase del primer parámetro
         binder.registerCustomEditor(String.class, "lastname", new UpperCaseFilter());
+
+        //Va a llenar el Country con sus campos y no solo el id
+        binder.registerCustomEditor(Country.class, "country", countryPropertyEditor);
     }
 
     //Mostrar el fomrulario en pantalla
@@ -156,16 +168,6 @@ public class FormController {
     @ModelAttribute("ListOfClassCountry")
     public List<Country> getListOfClassCountry() {
 
-        return Arrays.asList(
-                new Country(1,"CO","Colombia"),
-                new Country(2,"ES","España"),
-                new Country(3,"MX","México"),
-                new Country(4,"CL","Chile"),
-                new Country(5,"CA","Canadá"),
-                new Country(6,"AR","Argentina"),
-                new Country(7,"PE","Perú"),
-                new Country(8,"VE","Venezuela"),
-                new Country(9,"UR","Uruguay")
-        );
+        return countryService.getCountries();
     }
 }
