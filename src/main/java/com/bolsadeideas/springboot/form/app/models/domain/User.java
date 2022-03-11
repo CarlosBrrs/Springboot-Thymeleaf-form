@@ -78,6 +78,8 @@ public class User {
     @NotEmpty
     private String gender;
 
+    private String secretString;
+
     public User() {
     }
 
@@ -192,5 +194,13 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getSecretString() {
+        return secretString;
+    }
+
+    public void setSecretString(String secretString) {
+        this.secretString = secretString;
     }
 }

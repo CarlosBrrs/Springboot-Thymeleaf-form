@@ -78,6 +78,8 @@ public class FormController {
 
         //debe estar por defecto habilitado o deshabilitado
         newUser.setAllowMsg(true);
+
+        newUser.setSecretString("I am Batman");
         model.addAttribute("user", newUser);
         return "form";
     }
