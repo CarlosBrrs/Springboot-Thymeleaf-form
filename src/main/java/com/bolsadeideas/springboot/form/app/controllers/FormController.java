@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -112,10 +113,10 @@ public class FormController {
     la propia clase usando anotaciones predefinidas o personalizadas
      */
     @PostMapping("/form")
-    public String processForm(/*@ModelAtributte("myUser")*/@Valid User newUser, BindingResult result, Model model, SessionStatus session) {
+    public String processForm(/*@ModelAtributte("myUser")*/@Valid User newUser, BindingResult result, Model model/*, SessionStatus session va desde el GET*/) {
                               /*sirve para darle ese nombre al objeto que va a la vista de forma automatica en caso que falle la validacion*/
 
-        model.addAttribute("title", "Filled form");
+        model.addAttribute("title", "Filled form"); /*ya no se necesita porque va desde el GET
 
         //Si se comenta este validator, se debe agregar al InitBinder para que valide desde el @Valid con lo que se configuró en la clase UserValidator
         //validator.validate(newUser, result);
@@ -141,8 +142,24 @@ public class FormController {
             //Cuando se valida el formulario y se retorna al form nuevamente, lleva un objeto user (nombre de la clase en minusculas) automaticamente, con todos sus atributos, pudiendo llamarlo con thymeleaf
             return "form";
         }
-        model.addAttribute("newUser", newUser);
+        model.addAttribute("user", newUser);
         //Cuando finaliza el proceso se debe limpiar con setComplete y de forma automatica se elimina el objeto usuario de la sesion
+        //session.setComplete(); Va desde el GET
+        return "redirect:/app/getUserData";
+    }
+
+    /* Se crea este método porque al enviar por primera vez el formulario, se carga la vista filled, pero si se da refresh
+    se enviará nuevamente el formulario lleno y esto puede generar duplicidad en la base de datos, lo recomendable es crear
+    un método GET y ser este el responsable de entregar la visualización de los datos, llamandolo con redirect en el método POST
+*/
+    @GetMapping("/getUserData")
+    public String getUserData (@SessionAttribute(name = "user", required = false) User newUser, Model model, SessionStatus session) {
+
+        //El user se limina por el setComplete, asi que al refrescar el getUserData, lanzará error por pasar un usuario null, asi que lo redigirimos al formulario
+        if(newUser == null) {
+            return "redirect:/app/form";
+        }
+        model.addAttribute("title", "Filled form");
         session.setComplete();
         return "filled";
     }
