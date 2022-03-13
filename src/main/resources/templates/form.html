@@ -188,10 +188,10 @@
             <div th:each="role: ${ListOfClassRole}" class="row col-sm-2">
                 <!-- Por debajo toma el role del th:value y lo agrega a la lista roles del th:field
                  value del input envia el key y text de label toma el valor -->
-                <input type="checkbox" th:field="*{roles}" th:value="${role.id}" class="col-sm-1">
+                <input type="checkbox" th:field="*{roles}" th:value="${role.id}" class="form-check-input col-sm-1">
                 <!--name="roles" -->
                 <!--th:for para marcar el checkbox cliceando sobre el nombre del rol-->
-                <label th:for="${#ids.prev('roles')}" th:text="${role.name}" class="col-form-label col-sm-1"></label>
+                <label th:for="${#ids.prev('roles')}" th:text="${role.name}" class="form-check-label col-form-label col-sm-1"></label>
             </div>
             <!--<div th:if="${error != null && error.containsKey('roles')}" th:text="${error.get('roles')}"></div> -->
             <div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" class="alert alert-danger"></div>
@@ -200,10 +200,10 @@
         </br>
 
         <!--No se valida porque solo tiene dos opciones-->
-        <div class="form-group row">
-            <label for="allowMsg" class="col-form-label col-sm-2">Allow messages: </label>
+        <div class="form-group row form-switch">
+            <label for="allowMsg" class="col-form-label col-sm-2 ">Allow messages: </label>
             <div class="row col-sm-4">
-                <input type="checkbox" id="allowMsg" th:field="*{allowMsg}" class="col-sm-1">
+                <input type="checkbox" id="allowMsg" th:field="*{allowMsg}" class="form-check-input col-sm-1" role="switch">
                 <!--name="allowMsg" -->
             </div>
         </div>
@@ -213,7 +213,7 @@
         <div class="form-group row">
             <label class="col-form-label col-sm-2">Gender: </label>
             <div th:each="gender: ${genders}" class="row col-sm-2">
-                <input type="radio" th:field="*{gender}" th:value="${gender}" class="col-sm-1">
+                <input type="radio" th:field="*{gender}" th:value="${gender}" class="form-check-input col-sm-1">
                 <!--name="gender" -->
                 <label th:for="${#ids.prev('gender')}" th:text="${gender}" class="col-form-label col-sm-1"></label>
             </div>
