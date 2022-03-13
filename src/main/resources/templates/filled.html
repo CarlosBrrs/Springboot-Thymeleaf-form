@@ -3,42 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${title}"></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
+<!-- Se pasa por clase de Bootstrap
+<h2 th:text="${title}"></h2>-->
+<div class="container">
+    <a th:href="@{/app/form}" class="btn btn-success my-3 btn-lg">Regresar al formulario</a>
+    <ul class="list-group my-3">
+        <li class="list-group-item active" th:text="${title}"></li>
+        <li class="list-group-item" th:text="${user.username}"></li>
+        <li class="list-group-item" th:text="${user.id}"></li>
+        <li class="list-group-item" th:text="${user.name}"></li>
+        <li class="list-group-item" th:text="${user.lastname}"></li>
+        <li class="list-group-item" th:text="${user.password}"></li>
+        <li class="list-group-item" th:text="${user.email}"></li>
+        <li class="list-group-item" th:text="${user.count}"></li>
+        <!-- Al pasar el birthDate de la vista al controller, se convierte de String a Date, pero al pasar del controller
+        a la vista, se pasa de Date a String y así lo mostrará tyhmeleaf. Se debe formatear de nuevo de Date a String
+         con un helper de thymeleaf llamandolo con #-->
+        <li class="list-group-item" th:text="${#dates.format(user.birthDate, 'dd/MMMM/yyyy')}"></li>
+        <!--<li th:text="${user.country}"></li>-->
+        <li class="list-group-item" th:text="${user.country.id}"></li>
+        <li class="list-group-item" th:text="${user.country.code}"></li>
+        <li class="list-group-item" th:text="${user.country.name}"></li>
+        <li class="list-group-item" th:text="'¿Permite envio de mensajes?: '+ ${user.allowMsg}"></li>
+        <li class="list-group-item" th:text="${user.gender}"></li>
+        <li class="list-group-item" th:text="${user.secretString}"></li>
 
-<h2 th:text="${title}"></h2>
+    </ul>
+<!-- Se pasa por clase de Bootstrap
+    <div>Roles:</div>-->
 
-<ul>
-    <li th:text="${newUser.username}"></li>
-    <li th:text="${newUser.id}"></li>
-    <li th:text="${newUser.name}"></li>
-    <li th:text="${newUser.lastname}"></li>
-    <li th:text="${newUser.password}"></li>
-    <li th:text="${newUser.email}"></li>
-    <li th:text="${newUser.count}"></li>
-    <!-- Al pasar el birthDate de la vista al controller, se convierte de String a Date, pero al pasar del controller
-    a la vista, se pasa de Date a String y así lo mostrará tyhmeleaf. Se debe formatear de nuevo de Date a String
-     con un helper de thymeleaf llamandolo con #-->
-    <li th:text="${#dates.format(newUser.birthDate, 'dd/MMMM/yyyy')}"></li>
-    <!--<li th:text="${newUser.country}"></li>-->
-    <li th:text="${newUser.country.id}"></li>
-    <li th:text="${newUser.country.code}"></li>
-    <li th:text="${newUser.country.name}"></li>
-    <li th:text="'¿Permite envio de mensajes?: '+ ${newUser.allowMsg}"></li>
-    <li th:text="${newUser.gender}"></li>
-    <li th:text="${newUser.secretString}"></li>
-
-</ul>
-
-<div>Roles:</div>
-
-<!--<ul>
-    <li th:each="role: ${newUser.roles}" th:text="${role}"></li>
-</ul>-->
-<!--Roles para el campo List<Role>-->
-<ul>
-    <li th:each="role: ${newUser.roles}" th:text="${role.code} + ': ' + ${role.name} + ' ==> ' + ${role.id}"></li>
-</ul>
-
+    <!--<ul>
+        <li th:each="role: ${user.roles}" th:text="${role}"></li>
+    </ul>-->
+    <!--Roles para el campo List<Role>-->
+    <ul class="list-group my-3">
+        <li class="list-group-item active" th:text="${title}">Roles:</li>
+        <li class="list-group-item" th:each="role: ${user.roles}"
+            th:text="${role.code} + ': ' + ${role.name} + ' ==> ' + ${role.id}"></li>
+    </ul>
+</div>
 </body>
 </html>
