@@ -9,6 +9,10 @@
 </head>
 <body>
 
+<div class="alert alert-success">
+    <span th:text="'Elapsed time: ' + ${elapsedTime} + ' ms'"></span>
+</div>
+
 <h2 th:text="${title}"></h2>
 
 <span th:text="${errors}"></span>
@@ -191,7 +195,8 @@
                 <input type="checkbox" th:field="*{roles}" th:value="${role.id}" class="form-check-input col-sm-1">
                 <!--name="roles" -->
                 <!--th:for para marcar el checkbox cliceando sobre el nombre del rol-->
-                <label th:for="${#ids.prev('roles')}" th:text="${role.name}" class="form-check-label col-form-label col-sm-1"></label>
+                <label th:for="${#ids.prev('roles')}" th:text="${role.name}"
+                       class="form-check-label col-form-label col-sm-1"></label>
             </div>
             <!--<div th:if="${error != null && error.containsKey('roles')}" th:text="${error.get('roles')}"></div> -->
             <div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" class="alert alert-danger"></div>
@@ -203,7 +208,8 @@
         <div class="form-group row form-switch">
             <label for="allowMsg" class="col-form-label col-sm-2 ">Allow messages: </label>
             <div class="row col-sm-4">
-                <input type="checkbox" id="allowMsg" th:field="*{allowMsg}" class="form-check-input col-sm-1" role="switch">
+                <input type="checkbox" id="allowMsg" th:field="*{allowMsg}" class="form-check-input col-sm-1"
+                       role="switch">
                 <!--name="allowMsg" -->
             </div>
         </div>
