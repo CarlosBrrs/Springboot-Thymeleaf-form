@@ -7,6 +7,10 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
+
+<div class="alert alert-success">
+    <span th:text="'Elapsed time: ' + ${elapsedTime} + ' ms'"></span>
+</div>
 <!-- Se pasa por clase de Bootstrap
 <h2 th:text="${title}"></h2>-->
 <div class="container">
@@ -33,8 +37,8 @@
         <li class="list-group-item" th:text="${user.secretString}"></li>
 
     </ul>
-<!-- Se pasa por clase de Bootstrap
-    <div>Roles:</div>-->
+    <!-- Se pasa por clase de Bootstrap
+        <div>Roles:</div>-->
 
     <!--<ul>
         <li th:each="role: ${user.roles}" th:text="${role}"></li>
