@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" , xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<section th:fragment="elapsedTimeReusable">
+    <div class="alert alert-success">
+        <span th:text="'Elapsed time: ' + ${elapsedTime} + ' ms'"></span>
+    </div>
+</section>
+</body>
+</html>

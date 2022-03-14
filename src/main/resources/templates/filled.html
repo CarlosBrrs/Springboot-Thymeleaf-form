@@ -7,10 +7,12 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
-
+<section th:replace="reusable/time :: elapsedTimeReusable"></section>
+<!--
+Se usa desde reusables
 <div class="alert alert-success">
     <span th:text="'Elapsed time: ' + ${elapsedTime} + ' ms'"></span>
-</div>
+</div>-->
 <!-- Se pasa por clase de Bootstrap
 <h2 th:text="${title}"></h2>-->
 <div class="container">
